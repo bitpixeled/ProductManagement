@@ -22,19 +22,21 @@ package com.halils.pm.data;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.LocalDate;
+import java.util.Objects;
 
 /**
- * {@code Product} class represents properties and behaviour
+ * {@code Product} abstract class represents properties and behaviour
  * of product objects in the Product Management System
  * <br>
- * Each product has an id, name and price
+ * Each product has an id, name, and price
  * <br>
  * Each product can have discount, calculated based on
  * {@link #DISCOUNT_RATE discount rate}
  * @author Halil SARI
- * @version 1.0.0
+ * @version 1.0.1
  *  */
-public class Product {
+public abstract class Product {
 
     /**
      * A constant that defines a {@link java.math.BigDecimal BigDecimal} value
@@ -49,20 +51,23 @@ public class Product {
     private BigDecimal price;
     private final Rating rating;
 
-    public Product() {
+    Product() {
         this(0, "No Name", BigDecimal.ZERO);
     }
 
-    public Product(int id, String name, BigDecimal price) {
+    Product(int id, String name, BigDecimal price) {
         this(id, name, price, Rating.NOT_RATED);
     }
-    public Product(int id, String name, BigDecimal price, Rating rating) {
+    Product(int id, String name, BigDecimal price, Rating rating) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.rating = rating;
     }
 
+    public LocalDate getBestBefore() {
+        return LocalDate.now();
+    }
 
     public Rating getRating() {
         return rating;
@@ -102,7 +107,35 @@ public class Product {
         return price.multiply(DISCOUNT_RATE).setScale(2, RoundingMode.HALF_UP);
     }
 
-    public Product applyRating (Rating newRating){
-        return new Product(id, name, price, newRating);
+    public abstract Product applyRating (Rating newRating);
+
+    @Override
+    public String toString() {
+        return  "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", discount=" + getDiscount() +
+                ", rating=" + rating.getStars() +
+                " " + getBestBefore();
+    }
+
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+        if (o instanceof Product) {
+            Product product = (Product) o;
+            return this.id == product.id && name.equals(product.name);
+        }
+        return false;
+    }
+
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
