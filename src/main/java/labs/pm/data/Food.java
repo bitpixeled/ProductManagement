@@ -18,32 +18,38 @@
  * THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.halils.pm.data;
+package labs.pm.data;
 
 import java.math.BigDecimal;
-import java.time.LocalTime;
+import java.time.LocalDate;
 
 /**
  * @author Halil SARI
  */
-public class Drink extends Product {
+public class Food extends Product {
+    private LocalDate bestBefore;
 
+    public LocalDate getBestBefore() {
+        return bestBefore;
+    }
 
-    Drink(int id, String name, BigDecimal price, Rating rating) {
+    Food(int id, String name, BigDecimal price, Rating rating, LocalDate bestBefore) {
         super(id, name, price, rating);
+        this.bestBefore = bestBefore;
     }
 
     @Override
     public BigDecimal getDiscount() {
-        LocalTime now = LocalTime.now();
-        return (now.isAfter(LocalTime.of(17, 30))
-                && now.isBefore(LocalTime.of(18, 30))) ? super.getDiscount() : BigDecimal.ZERO;
+        return (bestBefore.isEqual(LocalDate.now())) ? super.getDiscount() : BigDecimal.ZERO;
     }
 
     @Override
     public Product applyRating(Rating newRating) {
-        return new Drink(getId(), getName(), getPrice(), newRating);
+        return new Food(getId(), getName(), getPrice(), newRating, bestBefore);
     }
 
-
+    @Override
+    public String toString() {
+        return super.toString() + " " + bestBefore;
+    }
 }

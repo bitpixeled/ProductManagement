@@ -18,38 +18,28 @@
  * THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.halils.pm.data;
-
-import java.math.BigDecimal;
-import java.time.LocalDate;
+package labs.pm.data;
 
 /**
  * @author Halil SARI
  */
-public class Food extends Product {
-    private LocalDate bestBefore;
+public enum Rating {
 
-    public LocalDate getBestBefore() {
-        return bestBefore;
+    NOT_RATED("\u2606\u2606\u2606\u2606\u2606"),
+    ONE_STAR("\u2605\u2606\u2606\u2606\u2606"),
+    TWO_STAR("\u2605\u2605\u2606\u2606\u2606"),
+    THREE_STAR("\u2605\u2605\u2605\u2606\u2606"),
+    FOUR_STAR("\u2605\u2605\u2605\u2605\u2606"),
+    FIVE_STAR("\u2605\u2605\u2605\u2605\u2605");
+
+    private final String stars;
+
+    private Rating(String stars){
+        this.stars = stars;
     }
 
-    Food(int id, String name, BigDecimal price, Rating rating, LocalDate bestBefore) {
-        super(id, name, price, rating);
-        this.bestBefore = bestBefore;
+    public String getStars(){
+        return stars;
     }
 
-    @Override
-    public BigDecimal getDiscount() {
-        return (bestBefore.isEqual(LocalDate.now())) ? super.getDiscount() : BigDecimal.ZERO;
-    }
-
-    @Override
-    public Product applyRating(Rating newRating) {
-        return new Food(getId(), getName(), getPrice(), newRating, bestBefore);
-    }
-
-    @Override
-    public String toString() {
-        return super.toString() + " " + bestBefore;
-    }
 }

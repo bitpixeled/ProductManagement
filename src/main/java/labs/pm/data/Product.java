@@ -18,7 +18,7 @@
  * THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.halils.pm.data;
+package labs.pm.data;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -36,7 +36,7 @@ import java.util.Objects;
  * @author Halil SARI
  * @version 1.0.1
  *  */
-public abstract class Product {
+public abstract class Product implements Rateable<Product>{
 
     /**
      * A constant that defines a {@link java.math.BigDecimal BigDecimal} value
@@ -69,6 +69,7 @@ public abstract class Product {
         return LocalDate.now();
     }
 
+    @Override
     public Rating getRating() {
         return rating;
     }
@@ -107,7 +108,7 @@ public abstract class Product {
         return price.multiply(DISCOUNT_RATE).setScale(2, RoundingMode.HALF_UP);
     }
 
-    public abstract Product applyRating (Rating newRating);
+//    public abstract Product applyRating (Rating newRating);
 
     @Override
     public String toString() {

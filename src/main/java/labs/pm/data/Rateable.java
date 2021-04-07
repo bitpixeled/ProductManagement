@@ -18,28 +18,26 @@
  * THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.halils.pm.data;
+package labs.pm.data;
 
 /**
  * @author Halil SARI
  */
-public enum Rating {
+public interface Rateable<T> {
+    public static final Rating DEFAULT_RATING = Rating.NOT_RATED;
 
-    NOT_RATED("\u2606\u2606\u2606\u2606\u2606"),
-    ONE_STAR("\u2605\u2606\u2606\u2606\u2606"),
-    TWO_STAR("\u2605\u2605\u2606\u2606\u2606"),
-    THREE_STAR("\u2605\u2605\u2605\u2606\u2606"),
-    FOUR_STAR("\u2605\u2605\u2605\u2605\u2606"),
-    FIVE_STAR("\u2605\u2605\u2605\u2605\u2605");
+    T applyRating (Rating rating);
 
-    private final String stars;
-
-    private Rating(String stars){
-        this.stars = stars;
+    public default T applyRating (int stars){
+        return applyRating(convert(stars));
     }
 
-    public String getStars(){
-        return stars;
+    public default Rating getRating (){
+        return DEFAULT_RATING;
+    }
+
+    public static Rating convert (int stars){
+        return (stars >= 0 && stars <= 5) ? Rating.values()[stars] : DEFAULT_RATING;
     }
 
 }
