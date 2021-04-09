@@ -128,7 +128,7 @@ public abstract class Product implements Rateable<Product>{
 //        if (o == null || getClass() != o.getClass()) return false;
         if (o instanceof Product) {
             Product product = (Product) o;
-            return this.id == product.id && name.equals(product.name);
+            return this.id == product.id; // && name.equals(product.name);
         }
         return false;
     }
