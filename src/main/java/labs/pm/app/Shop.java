@@ -40,15 +40,24 @@ public class Shop {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        ProductManager pm = new ProductManager("ru-RU");
-        pm.createProduct(101,"Tea",BigDecimal.valueOf(1.99), Rating.NOT_RATED);
+        ProductManager pm = new ProductManager("en-GB");
+//        pm.createProduct(101,"Tea",BigDecimal.valueOf(1.99), Rating.NOT_RATED);
+        pm.parseProduct("D, 101, Tea, 1.99, 3, 2021-04-10");
+//        pm.parseProduct("D, 101, Tea, 1.99, 3");
         pm.printProductReport(101);
-        pm.parseReview("101, 4, Nice Cup of Tea");
 //        pm.reviewProduct(101, Rating.TWO_STAR, "Didn't like that much");
 //        pm.reviewProduct(101, Rating.FIVE_STAR, "Fine Tea");
 //        pm.reviewProduct(101, Rating.ONE_STAR, "Bad");
 //        pm.reviewProduct(101, Rating.FOUR_STAR, "Well made");
+        pm.parseReview("101, 4, Nice Cup of Tea");
+        pm.parseReview("101, 3, Not that good");
+        pm.parseReview("101, 5, Great");
+        pm.parseReview("101, 3, Was okay");
+        pm.parseReview("101, 5, Liked it");
         pm.printProductReport(101);
+
+        pm.parseProduct("F, 103, Cake, 3.99, 0, 2021-04-19");
+        pm.printProductReport(103);
 
 //        pm.createProduct(102,"Coffee",BigDecimal.valueOf(1.99), Rating.NOT_RATED);
 //        pm.reviewProduct(102, Rating.FOUR_STAR, "Nice cup of coffee");
