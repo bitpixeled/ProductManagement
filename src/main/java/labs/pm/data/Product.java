@@ -20,6 +20,7 @@
 
 package labs.pm.data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
@@ -36,7 +37,7 @@ import java.util.Objects;
  * @author Halil SARI
  * @version 1.0.1
  *  */
-public abstract class Product implements Rateable<Product>{
+public abstract class Product implements Rateable<Product>, Serializable {
 
     /**
      * A constant that defines a {@link java.math.BigDecimal BigDecimal} value

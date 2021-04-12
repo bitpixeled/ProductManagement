@@ -41,23 +41,38 @@ public class Shop {
      */
     public static void main(String[] args) {
         ProductManager pm = new ProductManager("en-GB");
-//        pm.createProduct(101,"Tea",BigDecimal.valueOf(1.99), Rating.NOT_RATED);
-        pm.parseProduct("D, 101, Tea, 1.99, 3, 2021-04-10");
-//        pm.parseProduct("D, 101, Tea, 1.99, 3");
-        pm.printProductReport(101);
-//        pm.reviewProduct(101, Rating.TWO_STAR, "Didn't like that much");
-//        pm.reviewProduct(101, Rating.FIVE_STAR, "Fine Tea");
-//        pm.reviewProduct(101, Rating.ONE_STAR, "Bad");
-//        pm.reviewProduct(101, Rating.FOUR_STAR, "Well made");
-        pm.parseReview("101, 4, Nice Cup of Tea");
-        pm.parseReview("101, 3, Not that good");
-        pm.parseReview("101, 5, Great");
-        pm.parseReview("101, 3, Was okay");
-        pm.parseReview("101, 5, Liked it");
-        pm.printProductReport(101);
 
-        pm.parseProduct("F, 103, Cake, 3.99, 0, 2021-04-19");
+        pm.createProduct(101,"Tea", BigDecimal.valueOf(1.99), Rating.NOT_RATED);
+        pm.createProduct(102,"Coffee", BigDecimal.valueOf(2.99), Rating.NOT_RATED);
+        pm.createProduct(103,"Whiskey", BigDecimal.valueOf(9.99), Rating.NOT_RATED);
+        pm.createProduct(104,"Coke", BigDecimal.valueOf(1.99), Rating.NOT_RATED);
+
+        pm.reviewProduct(101, Rating.FOUR_STAR, "Was okay");
+        pm.reviewProduct(101, Rating.FOUR_STAR, "Not Bad");
+        pm.reviewProduct(101, Rating.THREE_STAR, "Didn't like it");
+        pm.reviewProduct(102, Rating.FOUR_STAR, "Smells good");
+        pm.reviewProduct(103, Rating.FIVE_STAR, "Great");
+        pm.reviewProduct(104, Rating.FOUR_STAR, "It's Good");
+
+        pm.printProductReport(101);
+        pm.printProductReport(102);
         pm.printProductReport(103);
+        pm.printProductReport(104);
+
+//        pm.parseProduct("D, 101, Tea, 1.99, 3, 2021-04-10");
+//        pm.parseProduct("D, 102, Coffee, 1.99, 3, 2021-04-11");
+//        pm.parseProduct("D, 103, Whiskey, 9.99, 3, 2021-04-11");
+//        pm.parseProduct("D, 104, Coke, 1.99, 3, 2021-04-11");
+
+//        pm.parseReview("101, 4, Nice Cup of Tea");
+//        pm.parseReview("101, 3, Not that good");
+//        pm.parseReview("102, 5, Great");
+//        pm.parseReview("103, 5, Was okay");
+//        pm.parseReview("104, 5, Liked it");
+
+
+//        pm.parseProduct("F, 103, Cake, 3.99, 0, 2021-04-19");
+//        pm.printProductReport(103);
 
 //        pm.createProduct(102,"Coffee",BigDecimal.valueOf(1.99), Rating.NOT_RATED);
 //        pm.reviewProduct(102, Rating.FOUR_STAR, "Nice cup of coffee");
